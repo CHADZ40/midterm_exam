@@ -54,6 +54,8 @@ flowchart TD
   N2 -- No --> N3[Show not found]
   N2 -- Yes --> N4[/Input quantity to add/]
   N4 --> N5[Increase quantity]
+  N4 --> N6[Decrease quantity]
+  N6 --> I
   N5 --> I
   N3 --> I
 
