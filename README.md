@@ -22,59 +22,61 @@ This project covers the topic **Inventory Management System** with the following
 
 ## Flowchart
 
-```mermaid
 flowchart TD
   A([Start]) --> B[Show title]
-  B --> C[Login attempts = 1..3 (for loop)]
-  C --> D[/Input username + password/]
+  B --> C[Login attempts 1 to 3]
+  C --> D[/Input username and password/]
   D --> E{Credentials correct?}
   E -- Yes --> F[Login successful]
-  E -- No --> G[Show incorrect + attempts left]
+  E -- No --> G[Show incorrect and attempts left]
   G --> H{Attempts remaining?}
   H -- Yes --> D
   H -- No --> Z([End: Access denied])
 
-  F --> I[Seed sample items (optional)]
-  I --> J[Show Menu]
-  J --> K[/Input choice/]
+  F --> I[Show menu]
+  I --> J[/Input choice/]
+  J --> K{Choice?}
 
-  K --> L{Choice?}
+  K -- 1 --> L[View inventory]
+  L --> I
 
-  L -- "1 View Inventory" --> M[Display all items: ID, Name, Quantity]
-  M --> P[Press Enter] --> J
+  K -- 2 --> M[Add item]
+  M --> M1[/Input name and quantity/]
+  M1 --> M2[Generate unique ID]
+  M2 --> M3[Save item]
+  M3 --> I
 
-  L -- "2 Add Item" --> N[/Input item name + quantity/]
-  N --> N1[Generate unique 6-digit ID]
-  N1 --> N2[Add item to inventory]
-  N2 --> P --> J
+  K -- 3 --> N[Update stock]
+  N --> N1[/Input item ID/]
+  N1 --> N2{ID exists?}
+  N2 -- No --> N3[Show not found]
+  N2 -- Yes --> N4[/Input quantity to add/]
+  N4 --> N5[Increase quantity]
+  N5 --> I
+  N3 --> I
 
-  L -- "3 Update Stock" --> O[/Input item ID/]
-  O --> O1{ID exists?}
-  O1 -- No --> O2[Show 'Item not found']
-  O2 --> P --> J
-  O1 -- Yes --> O3[/Input quantity to ADD/]
-  O3 --> O4[Increase item quantity]
-  O4 --> P --> J
+  K -- 4 --> O[Search item]
+  O --> O1[/Input item ID/]
+  O1 --> O2{ID exists?}
+  O2 -- No --> O3[Show not found]
+  O2 -- Yes --> O4[Display item details]
+  O3 --> I
+  O4 --> I
 
-  L -- "4 Search Item" --> Q[/Input item ID/]
-  Q --> Q1{ID exists?}
-  Q1 -- No --> Q2[Show 'Item not found']
-  Q2 --> P --> J
-  Q1 -- Yes --> Q3[Display item details]
-  Q3 --> P --> J
+  K -- 5 --> P[Remove item]
+  P --> P1[/Input item ID/]
+  P1 --> P2{ID exists?}
+  P2 -- No --> P3[Show not found]
+  P2 -- Yes --> P4[Remove item]
+  P3 --> I
+  P4 --> I
 
-  L -- "5 Remove Item" --> R[/Input item ID/]
-  R --> R1{ID exists?}
-  R1 -- No --> R2[Show 'Item not found']
-  R2 --> P --> J
-  R1 -- Yes --> R3[Remove item from inventory]
-  R3 --> P --> J
+  K -- 6 --> Q[Low stock alert]
+  Q --> Q1[Check all items]
+  Q1 --> Q2{Any item low?}
+  Q2 -- Yes --> Q3[Display low stock items]
+  Q2 -- No --> Q4[Show all good]
+  Q3 --> I
+  Q4 --> I
 
-  L -- "6 Low Stock Alert" --> S[Check all items]
-  S --> S1{Any item qty <= threshold?}
-  S1 -- Yes --> S2[Display low stock items]
-  S2 --> P --> J
-  S1 -- No --> S3[Show 'No low stock items']
-  S3 --> P --> J
-
-  L -- "0 Exit" --> T([End: Goodbye])
+  K -- 0 --> R([End: Goodbye])
