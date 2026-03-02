@@ -39,7 +39,8 @@ flowchart TD
   J --> K{Choice?}
 
   K -- 1 --> L[View inventory]
-  L --> I
+  L --> In[Show items]
+  In --> I
 
   K -- 2 --> M[Add item]
   M --> M1[/Input name and quantity/]
