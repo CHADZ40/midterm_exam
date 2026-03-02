@@ -22,6 +22,7 @@ This project covers the topic **Inventory Management System** with the following
 
 ## Flowchart
 
+```mermaid
 flowchart TD
   A([Start]) --> B[Show title]
   B --> C[Login attempts 1 to 3]
