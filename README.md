@@ -52,12 +52,12 @@ flowchart TD
   N --> N1[/Input item ID/]
   N1 --> N2{ID exists?}
   N2 -- No --> N3[Show not found]
-  N2 -- Yes --> N4[/Input quantity to add/]
+  N2 -- Yes --> N4[/Input quantity/]
   N4 --> N5[Increase quantity]
   N4 --> N6[Decrease quantity]
-  N6 --> I
-  N5 --> I
-  N3 --> I
+  N6 --> N67[Updated]
+  N5 --> N67[Updated]
+  N67 --> I
 
   K -- 4 --> O[Search item]
   O --> O1[/Input item ID/]
