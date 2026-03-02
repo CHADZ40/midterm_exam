@@ -1,45 +1,80 @@
 # midterm_exam
-This is a share coding document for midterm exam in Java programming I class
 
+This is a shared coding document for the Midterm Exam in **Java Programming I**.
 
-#Project scope:
+## Project Scope
 
-this project is cover a topic "Inventory management system" which have a flwo like this:
+This project covers the topic **Inventory Management System** with the following flow:
 
-1. First start with the user log in to make sure that only the authorized people can access this system. by using the for loop, the log in process can be done wrong for only three times only. Avoid any attack just like brute force or dictionary to break this scevurity system.
+1. **Login System**
+   - User must log in so only authorized people can access the system.
+   - Uses a **for-loop** to limit login attempts to **3 times** to help prevent brute force or dictionary attacks.
 
-2. After succcessfully logged in, user can use different fucntions below:
+2. **After successful login, user can use these functions:**
+   - **View Inventory**: Show all items in stock with **unique ID** and **quantity**.
+   - **Add Item**: Add new item name and quantity; system generates a **unique ID**.
+   - **Update Stock**: Enter item **unique ID** to add more quantity to that item.
+   - **Search Item**: Enter item **unique ID** to see item details.
+   - **Remove Item**: Enter item **unique ID** to remove the item completely.
+   - **Low Stock Alert**: System alerts when any item stock is low (<= threshold).
 
-- View Intentory: by clicking this fucntion all the items that contain in the stock list will be appear on screen, by attach with the unique ID that randomly generate, and quantities.
+---
 
-- Add items: user can have a rigth to add any new items by putting its name into the stock list with the quantities, and computer will generate a unique ID for it
+## Flowchart
 
-- update stock: by entering the item's unique ID, user will have a ability to add more stock to one specific items
+```mermaid
+flowchart TD
+  A([Start]) --> B[Show title]
+  B --> C[Login attempts = 1..3 (for loop)]
+  C --> D[/Input username + password/]
+  D --> E{Credentials correct?}
+  E -- Yes --> F[Login successful]
+  E -- No --> G[Show incorrect + attempts left]
+  G --> H{Attempts remaining?}
+  H -- Yes --> D
+  H -- No --> Z([End: Access denied])
 
-- search item: by entering the item's unique ID, user can see what product is it
+  F --> I[Seed sample items (optional)]
+  I --> J[Show Menu]
+  J --> K[/Input choice/]
 
-- Remove item: by entering the item's unique ID, user can remove the whole product info out of the system
+  K --> L{Choice?}
 
-- low stock alert: when the stock of items is low, computer will alert to the user know.
+  L -- "1 View Inventory" --> M[Display all items: ID, Name, Quantity]
+  M --> P[Press Enter] --> J
 
+  L -- "2 Add Item" --> N[/Input item name + quantity/]
+  N --> N1[Generate unique 6-digit ID]
+  N1 --> N2[Add item to inventory]
+  N2 --> P --> J
 
+  L -- "3 Update Stock" --> O[/Input item ID/]
+  O --> O1{ID exists?}
+  O1 -- No --> O2[Show 'Item not found']
+  O2 --> P --> J
+  O1 -- Yes --> O3[/Input quantity to ADD/]
+  O3 --> O4[Increase item quantity]
+  O4 --> P --> J
 
+  L -- "4 Search Item" --> Q[/Input item ID/]
+  Q --> Q1{ID exists?}
+  Q1 -- No --> Q2[Show 'Item not found']
+  Q2 --> P --> J
+  Q1 -- Yes --> Q3[Display item details]
+  Q3 --> P --> J
 
-#Credit
+  L -- "5 Remove Item" --> R[/Input item ID/]
+  R --> R1{ID exists?}
+  R1 -- No --> R2[Show 'Item not found']
+  R2 --> P --> J
+  R1 -- Yes --> R3[Remove item from inventory]
+  R3 --> P --> J
 
-done by students project
-members: 
+  L -- "6 Low Stock Alert" --> S[Check all items]
+  S --> S1{Any item qty <= threshold?}
+  S1 -- Yes --> S2[Display low stock items]
+  S2 --> P --> J
+  S1 -- No --> S3[Show 'No low stock items']
+  S3 --> P --> J
 
-- YEONG, Vechakasysothon
-
-- SOKHOM, Menghour
-
-- Heng, Raboth
-
-- LONG, Bunhong
-
-- CHHOR, Kongheng
-
-Department of Technologies,
-
-American University of Phnom Penh
+  L -- "0 Exit" --> T([End: Goodbye])
